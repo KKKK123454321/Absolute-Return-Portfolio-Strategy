@@ -8,7 +8,7 @@
   - Timing indicator for gold: Combining changes in US Treasury bond yields, VIX hedging, and gold price momentum to generate signals for adjusting positions in gold.
 
 ## 2. Overflow
-### Timing Indicator for Stocks and Bonds
+### 1) Timing Indicator for Stocks and Bonds
 #### Equity Risk Premium Indicator
   ERP refers to the difference between the expected returns of the stock market and the bond market. It represents the excess return that investors anticipate from investing in stocks compared to bonds. However, Chinese index valuations are generally lower, and ERP tends to be greater than 0 in the long term. Therefore, the absolute value reference has limited significance. Instead, we adopt the rolling five-year percentile of ERP as an indicator of the relative attractiveness of stocks compared to bonds.
   - [ ] Signal indicator: Five-year percentile of ERP - Index-weighted moving average (window period = 120 trading days). As ERP is a valuation-based indicator, the market may not immediately reverse when ERP is at a high/low level. Therefore, using weighted ERP percentiles for long-term data smoothing is implemented with a default window period of 120 trading days.
@@ -28,7 +28,7 @@ Backtesting Results: For monthly holding periods, the short-term moving average 
   - If the ERP signal generates a bullish signal for the stock market, and the volume-price indicator shows increased volume with an upward move, the CSI 800 Index generates a signal to add holdings (1). If both signals indicate bearish sentiments, the CSI 800 Index generates a signal to reduce holdings (-1), otherwise, no signal is generated (0).
   - Backtesting Results: The timing effect of the combined timing indicator on the CSI 800 Index is evident. The combination of signals significantly improves the net value compared to using ERP signals alone, and it also provides better drawdown control. The annualized return rate is 12%.
 
-### Gold Timing
+### 2) Gold Timing
 #### US Treasury Yields
   There is a clear negative correlation between gold and US Treasury yields.
   - [ ] Signal generation: We use the N-day simple moving average (MA) of the 10-year US Treasury real yield to depict the direction of changes in real yields. If the US Treasury real yield > MA(20), it indicates an upward trend in real yields, triggering a signal to reduce holdings in gold (-1). Conversely, if the real yield is below the moving average, it generates a signal to increase holdings in gold (1).
