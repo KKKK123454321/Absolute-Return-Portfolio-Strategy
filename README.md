@@ -19,33 +19,33 @@
 #### Stock Volume-Price Indicators
   ERP indicator has an issue of premature entry/exit. Therefore, we use short-term volume-price signals as a starting point for market trends. 
   - Individual Moving Average Signal: Backtesting results of a strategy based on the 5-day moving average on the CSI 800 Index.
-Backtesting Results: For monthly holding periods, the short-term moving average timing performs better than the long-term, with a win rate of more than 55%.
+    - [ ] Backtesting Results: For monthly holding periods, the short-term moving average timing performs better than the long-term, with a win rate of more than 55%.
   - Individual Volume Signal: If the signal's trading volume on that day is greater than the average volume of the past 5 days, it is considered as increased volume, generating a buy signal. Conversely, if the volume is lower, it generates a bearish signal.
     - [ ] Backtesting Results: The win rate is approximately 60%.
   - Volume-Price Indicator: Increased volume with an upward move + breaking below the moving average: When both the trading volume and moving average generate a bullish signal, it triggers a buy signal. On the other hand, if the moving average generates a bearish signal, it triggers a sell signal.
 #### Composited Signal
   *Weighted ERP percentile signal + Volume-Price indicator signal (MA + Volume)* : 
-  - If the ERP signal generates a bullish signal for the stock market, and the volume-price indicator shows increased volume with an upward move, the CSI 800 Index generates a signal to add holdings (1). If both signals indicate bearish sentiments, the CSI 800 Index generates a signal to reduce holdings (-1), otherwise, no signal is generated (0).
+  - ERP[70%，30%，120]+ Volume-Price[5，5]-> Signal[1，-1，0]
   - Backtesting Results: The timing effect of the combined timing indicator on the CSI 800 Index is evident. The combination of signals significantly improves the net value compared to using ERP signals alone, and it also provides better drawdown control. The annualized return rate is 12%.
 
 ### 2) Gold Timing
 #### US Treasury Yields
   There is a clear negative correlation between gold and US Treasury yields.
-  - [ ] Signal generation: We use the N-day simple moving average (MA) of the 10-year US Treasury real yield to depict the direction of changes in real yields. If the US Treasury real yield > MA(20), it indicates an upward trend in real yields, triggering a signal to reduce holdings in gold (-1). Conversely, if the real yield is below the moving average, it generates a signal to increase holdings in gold (1).
+  - [ ] Signal generation: We use the N-day simple moving average (MA) of the 10-year US Treasury real yield to depict the direction of changes in real yields. MA[20] -> Signal[1，-1]
     - [ ] Backtesting period: 2004 - 2022
     - [ ] Signal Frequency: Monthly (M)
     - [ ] Results: The timing effect of the US Treasury yield moving average (N=20) on gold shows that the timing strategy can outperform a buy-and-hold approach for gold, especially in the past decade where the outperformance is more pronounced. The strategy has an annualized return rate of 11%.
 
 #### VIX
   The CBOE's VIX index measures the 30-day annualized implied volatility of the S&P 500. Implied volatility tends to rise during market turbulence or economic recessions. When the market is volatile, gold's safe haven properties tend to improve, and funds may seek refuge in assets such as gold. It is generally believed that when the VIX is above 20, market risk sentiment begins to heat up.
-  - [ ] Signal generation: If the maximum value of the VIX index closing prices over a rolling 15-day period > 20, it indicates an overall increase in market risk, triggering a signal to increase holdings in gold (1). Otherwise, no signal is generated (0).
+  - [ ] Signal generation: VIX [15] -> Signal [1, 0]
     - [ ] Backtesting period: 2004 - 2022
     - [ ] Signal Frequency: Monthly (M)
     - [ ] Results: The signal captured the upward movement of gold during the market turmoil around 2008 and avoided the one-sided uptrends in the US stock market from 2012-2014 and 2015-2018. It also captured the volatile trends of gold when market panic subsided.
 
 #### Gold Price Momentum
   The gold price exhibits distinct periodic trends, and we can capture the direction of gold's own movement using gold price momentum.
-  - [ ] Signal generation: Gold price N-day momentum = (Gold price today / Gold price N days ago) - 1 , Parameters [20, 60, 250]; Signals [1,0]
+  - [ ] Signal generation: Gold price N-day momentum = (Gold price today / Gold price N days ago) - 1 , Gold Price [20, 60, 250]; Signals [1,0]
     - [ ] Backtesting period: 2004 - 2022
     - [ ] Signal Frequency: Monthly (M)
     - [ ] Results:  The 250-day momentum signal for gold demonstrated the best performance in terms of timing.
